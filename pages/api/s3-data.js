@@ -1,4 +1,4 @@
-// pages/api/s3-data.js (or app/api/s3-data/route.js for App Router)
+// pages/api/s3-data.js
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 
 const s3Client = new S3Client({
