@@ -11,7 +11,15 @@ const s3Client = new S3Client({
 
 export default async function handler(req, res) {
   const { key } = req.query;
-  
+
+  // Log environment variables (do NOT log secrets in production)
+  console.log('S3 ENV:', {
+    region: process.env.MY_REGION,
+    bucket: process.env.MY_S3_BUCKET_NAME,
+    accessKey: !!process.env.MY_ACCESS_KEY_ID,
+    secretKey: !!process.env.MY_SECRET_ACCESS_KEY
+  });
+
   if (!key) {
     return res.status(400).json({ error: 'Missing key parameter' });
   }
@@ -25,10 +33,20 @@ export default async function handler(req, res) {
     const response = await s3Client.send(command);
     const data = await response.Body.transformToString();
     const jsonData = JSON.parse(data);
-    
+
     res.status(200).json(jsonData);
   } catch (error) {
-    console.error('S3 Error:', error);
-    res.status(500).json({ error: 'Failed to fetch data from S3' });
+    console.error('S3 Error:', {
+      message: error.message,
+      code: error.code,
+      name: error.name,
+      stack: error.stack
+    });
+    res.status(500).json({ 
+      error: 'Failed to fetch data from S3',
+      details: error.message,
+      code: error.code,
+      name: error.name
+    });
   }
 }
