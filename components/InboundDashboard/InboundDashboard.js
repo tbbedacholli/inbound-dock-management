@@ -536,7 +536,7 @@ const LoadCalendar = () => {
       }}>
         <Box>
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
-            Today's Load Operations
+            Today&apos;s Load Operations
           </Typography>
           <Typography variant="body1" sx={{ opacity: 0.8, fontWeight: 500 }}>
             {new Date().toLocaleDateString('en-US', { 
@@ -642,7 +642,7 @@ const LoadCalendar = () => {
           border: '1px solid #e0e0e0'
         }}>
           <Typography variant="h6" sx={{ fontWeight: 600, mb: 3, color: '#424242' }}>
-            Today's Operations Summary
+            Today&apos;s Operations Summary
           </Typography>
           
           <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, mb: 3 }}>
